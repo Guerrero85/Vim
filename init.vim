@@ -1,12 +1,12 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 
-"themes
-"Plug 'sainnhe/sonokai'
-Plug 'phanviet/vim-monokai-pro'
+"----------themes----------------------------------------
+" Tema principal instalado 'sainnhe/sonokai'
+"Plug 'phanviet/vim-monokai-pro'
+Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 
-
-"visual
+"---Plugin para aspecto visual----------------------------
 Plug 'davidhalter/jedi-vim'
 Plug 'vim-scripts/c.vim'
 Plug 'stanangeloff/php.vim'
@@ -15,7 +15,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'lilydjwg/colorizer'
 
 
-"Functionality
+"-------------functionality------------------------------
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'KabbAmine/vCoolor.vim'
@@ -23,12 +23,15 @@ Plug 'vim-python/python-syntax'
 Plug 'easymotion/vim-easymotion'
 Plug 'scrooloose/nerdtree'
 
-"----------------------------------------------------------------
+"----Functionality Plugins Web---------------------------
+Plug 'mattn/emmet-vim'
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"-----Plugins para C# (csharp)----------------------------
 
 Plug 'w0rp/ale'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'OmniSharp/omnisharp-vim'
-"-----------------------------------------------------------------------------
+"---------------------------------------------------------
 
 
 "code modification
@@ -38,7 +41,7 @@ Plug 'jiangmiao/auto-pairs'
 
 call plug#end()
 
-
+"----Configuracion Inicio-------
 syntax enable
 set number
 set expandtab
@@ -53,6 +56,9 @@ set cursorline
 set encoding=utf-8
 set clipboard=unnamedplus
 set colorcolumn=110
+set noshowmode
+
+"---------------------------------
 
 highlight ColoColumn ctermbg=0 guibg=lightgrey
 set termguicolors
@@ -83,8 +89,8 @@ nnoremap <leader>t :tabe<CR>
 
 
 
-"-------------------------------------------------------------------------------
-"Configuracion de OmniSharp
+
+"---------Configuracion de OmniSharp-----------------------------
 
 
 " Vimspector
@@ -139,7 +145,7 @@ augroup csharp_commands
 augroup END
 
 
-"----------------------------------------------------------------------------
+"----------------------------------------------------------
 
 
 "Configuration of FZF
@@ -166,15 +172,34 @@ let  g:C_UseTool_doxygen = 'yes'
 
 
 "easymotion
-nmap <leader>f  <Plug>(easymotion-s2)
+nmap <leader>s <Plug>(easymotion-s2)
 let g:EasyMotion_smartcase = 1
 
-
-colorscheme monokai_pro
 "theme monokai-pro
-let g:lightline = {
-     \ 'colorscheme': 'monokai_pro',
-      \ }
+"colorscheme monokai_pro
+"let g:lightline = {
+"     \ 'colorscheme': 'monokai_pro',
+"      \ }
+
+
+
+
+" For Neovim 0.1.3 and 0.1.4 - https://github.com/neovim/neovim/pull/2198
+if (has('nvim'))
+  let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
+endif
+
+" For Neovim > 0.1.5 and Vim > patch 7.4.1799 - https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162
+" Based on Vim patch 7.4.1770 (`guicolors` option) - https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd
+" https://github.com/neovim/neovim/wiki/Following-HEAD#20160511
+if (has('termguicolors'))
+  set termguicolors
+endif
+
+
+let g:material_terminal_italics = 1
+let g:material_theme_style = 'palenight-community'
+colorscheme material
 
 
 "Mapeo de la barra de estado airline
@@ -182,3 +207,7 @@ let g:airline#extensions#tabline#enabled = 1  " Mostrar buffers abiertos (como p
 let g:airline#extensions#tabline#fnamemod = ':t'  " Mostrar sólo el nombre del archivo
 let g:airline_powerline_fonts = 1 " Modifica los separadores para que tengan forma de triangulos
 let g:airline_theme='tomorrow'
+
+
+
+"-------Configuracion de COC.VIM-----------------------------
